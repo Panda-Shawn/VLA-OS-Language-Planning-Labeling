@@ -1,0 +1,54 @@
+The robot is operating in the following environment: **{scene_description}**
+
+The goal of the robot is to complete the following task: **{task_instruction}**
+
+## **Objective**
+You are given multiple demonstrations of task descriptions and corresponding high-level plans in **{task_plan_prompt}** in the following format:
+
+<demo_id>: <task><plan>
+
+Your goal is to **analyze these examples and determine the most suitable `<task>` and `<plan>`** for the given task. The selected `<task>` should **accurately capture the overall goal**, and the selected `<plan>` should **logically break down the task into a structured sequence of high-level steps**.
+
+---
+
+## **Instructions**
+
+### **Step 1: Analyze the Given Demonstrations**
+Review the `<task>` and `<plan>` pairs from multiple demonstrations. Identify patterns and differences in:
+- How the **task goal** is described.
+- How the **high-level plan** is structured.
+- The level of **granularity and abstraction** used in each plan.
+
+### **Step 2: Select the Most Suitable `<task>`**
+Choose a **single, well-formed `<task>`** that:
+- **Clearly and concisely describes the task** without unnecessary details.
+- **Is general enough** to apply to different task instances but **specific enough** to differentiate it from unrelated tasks.
+- **Maintains consistency** across all steps.
+
+### **Step 3: Construct a Consistent and Coherent `<plan>`**
+Select or refine a **single `<plan>`** that:
+- **Covers all essential high-level steps** needed to complete the task.
+- **Uses a logical, structured order** that can be followed step by step.
+- **Avoids redundancy or unnecessary complexity**.
+- **Ensures each step aligns with the chosen `<task>`**.
+
+---
+
+## **Output Format**
+Provide your final selection in the following format:
+
+<task>TASK</task><plan>PLAN</plan>
+
+Where:
+- **`<task></task>`** is the most suitable **task description**.
+- **`<plan></plan>`** is the **best high-level plan**, formatted as a numbered list with a 'Stop.' as the final step.
+
+---
+
+## **Example Output**
+<task>Move a cup from the table to the shelf.</task><plan>1. Reach for the cup on the table. 2. Grasp the cup securely. 3. Lift the cup off the table. 4. Move the cup toward the shelf. 5. Align the cup with the shelf. 6. Place the cup onto the shelf. 7. Release the cup and retract the arm. 8. Stop.</plan>
+
+---
+
+## **Final Step**
+After providing the selected `<task>` and `<plan>`, write `"FINISHED"` on a new line to indicate completion.

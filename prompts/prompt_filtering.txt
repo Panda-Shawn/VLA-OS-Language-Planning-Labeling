@@ -1,0 +1,93 @@
+Annotate the training trajectory with reasoning
+
+## Overview
+
+You are an expert reinforcement learning researcher who has trained a bimanul robot with two robotic arms to complete a given task. The robot followed an optimal policy and successfully accomplished the instruction: "{task}". During the task, the robot executed a sequence of actions, and each action corresponds to a step along the trajectory. For each step, the primitive movement is provided.
+
+Your goal is to annotate each step of the completed trajectory with detailed reasoning. This reasoning should incorporate the robot’s intermediate objectives, the observed environment, and the decision-making process behind choosing each action.
+
+## Experimental Setup
+
++ Task Instruction: "{task}" (This remains unchanged throughout the trajectory.)
+
++ Fixed Plan: The entire trajectory follows this predefined plan: "{plan}"
+
++ Primitive movements:
+
+The primitive movements the robot take is described by the following dictionary:
+
+```python
+{primitives_prompt}
+```
+
+Each key in this dictionary represents a step index, and the value is the set of features describing the action the robot is about to take at that step.
+
++ Environment Description:
+
+The robot is operating in the following environment: {scene_description}
+
+## Your Objectives
+
+1. Provide a comprehensive task overview
+
+First, describe the completed task in detail. Go beyond simply restating the given instruction. Include:
+
++ The primary activity and the intended outcome.
++ The objects involved and their relative locations in the environment.
++ The general sequence of high-level movements that were necessary to achieve the goal.
+
+From this description, identify the high-level movements that form the plan the robot likely followed. For each high-level movement, specify:
+
++ The range of trajectory steps that it spans.
++ A justification of why that high-level movement was needed.
+
+Present this overview in markdown format, using natural language and ensuring that the explanation is consistent with the completed trajectory as described in the provided features.
+
+2. Annotate each step with reasoning:
+
+For each step in the provided trajectory, generate a detailed reasoning entry that explains:
+
++ The remaining part of the task that needs to be completed at this step.
++ The current progress and what still needs to be done.
++ The objects and aspects of the environment that are still relevant.
++ The next steps in the plan and why the specific primitive movement at this step is the correct choice.
+
+You should start from the high-level understanding of the plan and then become more specific, integrating the environmental and state features that justify each individual action.
+
+**Format for Each Step’s Reasoning:**
+
+The reasoning for each step should be provided as a single string and must follow the template below. Wrap the entire set of step reasonings in a Python dictionary. The keys of this dictionary must match the step keys from the original trajectory, and there must be a one-to-one correspondence (one reasoning entry per step).
+
+For each step <step_id>, create an entry in the dictionary:
+
+```python
+<step_id>: "<reasoning>"
+```
+
+Within the <reasoning> string, include the following tags and contents in order:
+
++ <task></task>: Use "{task}" to describe the task for all steps.
++ <plan></plan>: Outline the remaining high-level plan using a numbered list “1. 2. 3.” from "{plan}"
++ <subtask></subtask>: Identify the current high-level subtask that should be done right now. If none remains, write <subtask>Stop.</subtask>.
++ <subtask_reason></subtask_reason>: Justify why this subtask should be executed now, considering the current environment and progress.
++ <move></move>: Describe the exact primitive movement the robotic arm will take at this step. Strictly follow the provided primitive movements.
++ <move_reason></move_reason>: Justify why this particular primitive movement is the correct choice right now, based on the observed features and the overall plan.
+
+Make sure each reasoning string is detailed, precise, and consistent with both the completed task and the provided trajectory features.
+
+## Summary of Required Output
+
+1. Task Description and High-Level Movements
+
++ A detailed overview of the completed task.
++ A description of the identified high-level movements, their step ranges, and the justifications for each.
+
+2. Step-by-Step Reasoning Dictionary
+
++ A Python dictionary whose keys correspond exactly to the step indices found in the trajectory features. Make sure the dictionary is wrapped within ```python```.
++ Each value is a single reasoning string, following the specified tagging format.
++ Make sure that the number of steps is the same as that of the provided primitive movements. Do not omit the steps after stop.
+
+3. FINISHED Label
+
++ After providing all required output, write a single label FINISHED on its own line to indicate that you have completed the instructions.
