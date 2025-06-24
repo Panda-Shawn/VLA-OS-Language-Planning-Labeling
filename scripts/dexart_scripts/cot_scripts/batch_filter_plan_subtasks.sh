@@ -4,7 +4,7 @@ export GOOGLE_API_KEY=
 
 
 
-python ./scripts/dexart_scripts/cot_scripts/batch_filter_plan_subtasks.py \
+python ./batch_filter_plan_subtasks.py \
     --libero_dataset_dir ./results/bucket/filtered \
     --libero_primitives_path ./data/bucket/primitives.json \
     --libero_scene_desc_path ./data/bucket/descriptions_bucket_fixed.json \
