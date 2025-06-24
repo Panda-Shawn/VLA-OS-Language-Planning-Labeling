@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "plan_label"
 authors = [
     {name = "Zixuan Liu", email="zixuanliu@u.nus.edu"},
-    {name = "Yudi Lin", email="verityw@berkeley.edu"},
+    {name = "Yudi Lin", email="yudilin@usc.edu"},
 ]
 description = "Language planning labeling for VLA-OS"
 version = "1.0"
