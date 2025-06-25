@@ -10,12 +10,16 @@ from tqdm import tqdm
 from dexart.scense_description.scripts.utils import NumpyFloatValuesEncoder
 from prismatic import load
 
+from utils import DATA_DIR
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--id", default=0, type=int)
 parser.add_argument("--gpu", default=0, type=int)
 parser.add_argument("--splits", default=1, type=int)
-parser.add_argument("--results-path", default="/data/lyd/embodied-CoT/data_results/data_cot_results/data_middle/dexart/results_descriptions/bucket")
+parser.add_argument("--results-path", default=str(DATA_DIR / "planning_datasets/bucket_dex_art_dataset/results_descriptions/bucket"))
 args = parser.parse_args()
+
+args.results_path = str(args.results_path)
 
 device = f"cuda:{args.gpu}"
 hf_token = ""
