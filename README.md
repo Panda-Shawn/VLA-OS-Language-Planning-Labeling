@@ -52,7 +52,7 @@ First, describe the scene with Prismatic-7B VLM.
 python scripts/example_scripts/describe_scene.py --dataset_dir data/tfds_datasets
 ```
 
-Then, extract the primitive moves with horizon of 10. Verify whether the interpretation of the `state` and `action` values is correct. The first six elements of the state represent translation and rotation in the world coordinate frame. In `gripper_action``, a value of +1 indicates closing the gripper, while -1 indicates opening it.
+Then, extract the primitive moves with horizon of 10. Verify whether the interpretation of the `state` and `action` values is correct. The first six elements of the state represent translation and rotation in the world coordinate frame. In `gripper_action`, a value of +1 indicates closing the gripper, while -1 indicates opening it.
 
 ```bash
 
