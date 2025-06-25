@@ -32,7 +32,7 @@ start_percent = args.id * split_percents
 end_percent = (args.id + 1) * split_percents
 
 builder = tfds.builder_from_directory(
-    "/dataset/dexart/bucket_dex_art_dataset/1.0.0"
+    "./dataset/dexart/bucket_dex_art_dataset/1.0.0" # Change to the directory where the downloaded TensorFlow bucket dataset is stored.
 )
 viz="bucket_viz"
 ds = builder.as_dataset(split=f"train[{start_percent}%:{end_percent}%]")
